@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://bk7472wthyqqe"]
+
+[ext_resource type="Texture2D" uid="uid://d1vb4vc24dgck" path="res://enemies/Blue Slime Spritesheet.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://cohatvq72pio0" path="res://player.gd" id="1_onrkg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(46, 80, 46, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(138, 112, 46, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("1_4flbx")
+region = Rect2(46, 112, 46, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pqhfw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onrkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3pqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqtel")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7nwsw"]
+radius = 21.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_onrkg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_pqhfw")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.026243422
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D"]
+position = Vector2(6, 6)
+shape = SubResource("CircleShape2D_7nwsw")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="AnimatedSprite2D/CollisionShape2D"]
+position = Vector2(0, 1)
